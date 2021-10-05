@@ -11,7 +11,7 @@ run/bot/test:
 
 .PHONY: run/bot/prod
 run/bot/prod:
-	@sudo go run ./cmd/bot -token=${TOKEN} -pubkey=${PUB_KEY} -addr=${PORT}
+	@sudo go run ./cmd/tristatcompanion -token=${TOKEN} -pubkey=${PUB_KEY} -addr=${PORT}
 
 # ==================================================================================== #
 # BUILD
@@ -23,6 +23,6 @@ linker_flags = '-s -X main.version=${git_description}'
 ## build/api: build the cmd/api application
 .PHONY: build/bot
 build/bot:
-	@echo 'Building cmd/bot...'
-	go build -ldflags=${linker_flags} -o=./bin/fatebot ./cmd/fatebot
-	GOOS=linux GOARCH=amd64 go build -ldflags=${linker_flags} -o=./bin/linux_amd64/fatebot ./cmd/fatebot
+	@echo 'Building cmd/tristatcompanion...'
+	go build -ldflags=${linker_flags} -o=./bin/tristatcompanion ./cmd/tristatcompanion
+	GOOS=linux GOARCH=amd64 go build -ldflags=${linker_flags} -o=./bin/linux_amd64/tristatcompanion ./cmd/tristatcompanion
