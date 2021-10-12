@@ -1,3 +1,4 @@
 .envrc
 .rest
 .DS_store
+bin/

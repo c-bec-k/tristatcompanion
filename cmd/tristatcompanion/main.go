@@ -66,7 +66,8 @@ func main() {
 	}
 
 	bot.cmdCache = map[data.Snowflake]func(http.ResponseWriter, map[string]interface{}, data.Interaction){
-		882295378437873664: bot.ReplyRoll,
+		895024426087747645: bot.ReplyRoll,
+		897500010848067614: bot.ReplyAbout,
 	}
 
 	fmt.Printf("Running app on %v with version number %v\n", cfg.port, cfg.api)
@@ -92,7 +93,7 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	//fmt.Printf("Incoming Body: %s\n", b)
+	// fmt.Printf("Incoming Body: %s\n", b)
 	apireq := data.Interaction{}
 
 	err = json.Unmarshal(b, &apireq)
@@ -101,11 +102,11 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	fmt.Printf("APIreq struct: %+v\n", apireq)
-	fmt.Println("————————————————————")
+	// fmt.Printf("APIreq struct: %+v\n", apireq)
+	// fmt.Println("————————————————————")
 
 	if apireq.Type == 1 {
-		fmt.Println("Verification successful! Sending JSON reply")
+		// fmt.Println("Verification successful! Sending JSON reply")
 		jsonRes := `{"type": 1}`
 		tokenHeader := fmt.Sprintf("bot %v", app.config.token)
 		w.Header().Set("Authorization", tokenHeader)

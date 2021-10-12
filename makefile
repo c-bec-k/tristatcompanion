@@ -26,3 +26,9 @@ build/bot:
 	@echo 'Building cmd/tristatcompanion...'
 	go build -ldflags=${linker_flags} -o=./bin/tristatcompanion ./cmd/tristatcompanion
 	GOOS=linux GOARCH=amd64 go build -ldflags=${linker_flags} -o=./bin/linux_amd64/tristatcompanion ./cmd/tristatcompanion
+
+
+## rSync the bot to the server
+.PHONY: sync/bot
+sync/bot:
+	rsync --rsync-path="sudo rsync" -P bin/linux_amd64/tristatcompanion beck@45.153.48.58:/var/www/bots/ 
