@@ -68,6 +68,7 @@ func main() {
 	bot.cmdCache = map[data.Snowflake]func(http.ResponseWriter, map[string]interface{}, data.Interaction){
 		895024426087747645: bot.ReplyRoll,
 		897500010848067614: bot.ReplyAbout,
+		941509701680631839: bot.ReplyDamage,
 	}
 
 	fmt.Printf("Running app on %v with version number %v\n", cfg.port, cfg.api)
