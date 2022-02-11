@@ -104,12 +104,12 @@ func (bot *application) ReplyRoll(w http.ResponseWriter, opts map[string]interfa
 
 	var fields []data.EmbedField
 
-	modsField := data.EmbedField{"Modifiers", fmt.Sprintf("%+d%+d%+d (Stat+Attribute+Misc)", mods[0], mods[1], mods[2]), true}
+	modsField := data.EmbedField{Name: "Modifiers", Value: fmt.Sprintf("%+d%+d%+d (Stat+Attribute+Misc)", mods[0], mods[1], mods[2]), Inline: true}
 
 	fields = append(fields, modsField)
 
 	if edOb != "" {
-		moreDiceField := data.EmbedField{"Edges/Obstacles", edOb, true}
+		moreDiceField := data.EmbedField{Name: "Edges/Obstacles", Value: edOb, Inline: true}
 		fields = append(fields, moreDiceField)
 	}
 

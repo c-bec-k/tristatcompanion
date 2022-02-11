@@ -16,7 +16,7 @@ func DurationSinceEpoch(t time.Time) time.Duration {
 	return time.Duration(t.UnixNano()) - DiscordEpoch
 }
 
-type Snowflake uint64
+type Snowflake int64
 
 // NullSnowflake gets encoded into a null. This is used for
 // optional and nullable snowflake fields.
