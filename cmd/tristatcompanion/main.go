@@ -28,10 +28,10 @@ type application struct {
 }
 
 var (
-	UserAgent = "DiscordBot (https://github.com/c-bec-k/tsc, v0.1.0)"
+	UserAgent = "DiscordBot (https://github.com/c-bec-k/tsc, v1.1.0)"
 )
 
-//var version = "1.0.0"
+// var version = "1.0.0"
 
 func main() {
 	var cfg config
@@ -39,7 +39,7 @@ func main() {
 	flag.IntVar(&cfg.port, "addr", 8080, "HTTP network address")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
 	flag.StringVar(&cfg.token, "token", "", "your bot token")
-	flag.IntVar(&cfg.api, "api", 9, "default API version")
+	flag.IntVar(&cfg.api, "api", 10, "default API version")
 	flag.StringVar(&cfg.pubkey, "pubkey", "", "Your bot's public key")
 	flag.Parse()
 

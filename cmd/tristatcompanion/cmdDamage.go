@@ -11,20 +11,7 @@ import (
 
 func (bot *application) ReplyDamage(w http.ResponseWriter, opts map[string]interface{}, interaction data.Interaction) {
 
-	var dm, acv int
-	level := int(opts["level"].(float64))
-	if _, ok := opts["dm"]; ok {
-		dm = int(opts["dm"].(float64))
-	} else {
-		dm = 5
-	}
-	if _, ok := opts["acv"]; ok {
-		acv = int(opts["acv"].(float64))
-	}
-
-	totalDamage := (level * dm) + acv
-
-	fmt.Printf("Damage of: %d\nDM of: %d\nACV of: %d", totalDamage, dm, acv)
+	totalDamage := (getLevel(opts) * getDM(opts)) + getAcv(opts)
 
 	embed := data.MessageEmbed{
 		Color: 15217272,
@@ -40,20 +27,13 @@ func (bot *application) ReplyDamage(w http.ResponseWriter, opts map[string]inter
 
 	calcField := data.EmbedField{
 		Name:   "Damage Calculation",
-		Value:  fmt.Sprintf("(%d × %d) %+d \n([level × DM] + ACV)", level, dm, acv),
+		Value:  fmt.Sprintf("(%d × %d) %+d \n([level × DM] + ACV)", getLevel(opts), getDM(opts), getAcv(opts)),
 		Inline: false,
 	}
-
-	// modsField := data.EmbedField{"Modifiers", fmt.Sprintf("%+d%+d%+d (Stat+Attribute+Misc)", mods[0], mods[1], mods[2]), true}
 
 	fields = append(fields, calcField)
 
 	embed.Fields = fields
-
-	// if edOb != "" {
-	// 	moreDiceField := data.EmbedField{"Edges/Obstacles", edOb, true}
-	// 	fields = append(fields, moreDiceField)
-	// }
 
 	reply := data.InteractionResponse{
 		Type: data.ChannelMessageWithSourceCallback,
@@ -71,4 +51,22 @@ func (bot *application) ReplyDamage(w http.ResponseWriter, opts map[string]inter
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
+}
+
+func getLevel(opts map[string]interface{}) int {
+	return int(opts["level"].(float64))
+}
+
+func getDM(opts map[string]interface{}) int {
+	if _, ok := opts["dm"]; ok {
+		return int(opts["dm"].(float64))
+	}
+	return 5
+}
+
+func getAcv(opts map[string]interface{}) int {
+	if _, ok := opts["acv"]; ok {
+		return int(opts["acv"].(float64))
+	}
+	return 0
 }
